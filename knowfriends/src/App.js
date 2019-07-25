@@ -11,12 +11,21 @@ class App extends React.Component {
 			searchfield: ''
 		}
 	}
+
+	onsearchChange= (event) => {
+		this.setState({searchfield: event.target.value})
+	}
+
 	render(){
-return (
+		const filteredFriends = this.state.friends.filter(friends => {
+			return friends.name.toLowerCase().includes(this.state.searchfield.toLowerCase());
+		})
+
+	return (
 		<div className= 'tc'>
 		<h1> Introducing FRIENDS Characters</h1>
-		<SearchBox />
-		<CardList friends={this.state.friends} />
+		<SearchBox searchChange={this.onsearchChange} />
+		<CardList friends={filteredFriends} />
 		</div>
 		);
 	}
