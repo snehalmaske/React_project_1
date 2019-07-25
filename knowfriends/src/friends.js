@@ -22,18 +22,18 @@ export const friends = [
 	id: 3,
 	name: 'Phoebe Buffay',
 	username: 'Phoebe',
-	emai: 'phoebe@gmail.com'
+	email: 'phoebe@gmail.com'
 },
 {
 	id: 4,
 	name: 'Joey Tribbiani',
 	username: 'Joey',
-	emai: 'joey@gmail.com'
+	email: 'joey@gmail.com'
 },
 {
 	id: 5,
 	name: 'Chandler Bing',
 	username: 'Chandler',
-	emai: 'chandler@gmail.com'
+	email: 'chandler@gmail.com'
 }
 ];
