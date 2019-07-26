@@ -1,34 +1,43 @@
-import React from 'react';
+import React, { Component } from 'react';
 import CardList from './CardList';
 import SearchBox from './SearchBox';
-import {friends} from './friends';
+import Scroll from './Scroll';
+import './App.css';
 
-class App extends React.Component {
-	constructor() {
-		super()
-		this.state = {
-			friends: friends,
-			searchfield: ''
-		}
-	}
+class App extends Component {
+  constructor() {
+    super()
+    this.state = {
+      friends: [],
+      searchfield: ''
+    }
+  }
 
-	onsearchChange= (event) => {
-		this.setState({searchfield: event.target.value})
-	}
+  componentDidMount() {
+    fetch('https://jsonplaceholder.typicode.com/snehalmaske/user')
+      .then(response=> response.json())
+      .then(user => {this.setState({ friends: user})});
+  }
 
-	render(){
-		const filteredFriends = this.state.friends.filter(friends => {
-			return friends.name.toLowerCase().includes(this.state.searchfield.toLowerCase());
-		})
+  onSearchChange = (event) => {
+    this.setState({ searchfield: event.target.value })
+  }
 
-	return (
-		<div className= 'tc'>
-		<h1> Introducing FRIENDS Characters</h1>
-		<SearchBox searchChange={this.onsearchChange} />
-		<CardList friends={filteredFriends} />
-		</div>
-		);
-	}
+  render() {
+    const { friends, searchfield } = this.state;
+    const filteredFriends = friends.filter(friends =>{
+      return friends.name.toLowerCase().includes(searchfield.toLowerCase());
+    })
+    return (
+        <div className='tc'>
+          <h1 className='f1'>Introduction to FRIENDS</h1>
+          <SearchBox searchChange={this.onSearchChange}/>
+          <Scroll>
+            <CardList friends={filteredFriends} />
+          </Scroll>
+        </div>
+      );
+  }
 }
 
 export default App;
